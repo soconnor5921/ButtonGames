@@ -11,6 +11,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import static sample.GameCode.timer;
+
 public class Main extends Application
 {
 
@@ -32,8 +34,7 @@ public class Main extends Application
         green.setMinSize(50,50);
         green.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                GameCode.checkGreen("green");
+            public void handle(ActionEvent event) {GameCode.showing = true; GameCode.timer(green);
             }
         });
 

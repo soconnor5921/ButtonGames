@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class GameCode extends Application
 {
     private static List<Button> order = new ArrayList<Button>();
-    private static boolean showingOrder = false;
+    public static boolean showing = false;
     private static long timeStep;
 
     @Override
@@ -25,7 +25,7 @@ public class GameCode extends Application
 
     public static void createOrder()
     {
-        showingOrder = true;
+        showing = true;
         Button btn;
         btn = pickRandomColor();
         order.add(btn);
@@ -68,7 +68,7 @@ public class GameCode extends Application
 
     public static void timer(Button btn)
     {
-        timeStep = System.nanoTime() + 1000000000L;
+        timeStep = System.nanoTime() + 100000000L;
         new AnimationTimer()
         {
             public void handle(long now)
@@ -76,9 +76,9 @@ public class GameCode extends Application
                 if(now > timeStep)
                 {
                     timeStep = now + 1000000000L;
-                    showingOrder = !showingOrder;
+                    showing = !showing;
                 }
-                if(showingOrder)
+                if(showing)
                 {
                     Main.green.setStyle("-fx-background-color: lightgreen;");
                 }

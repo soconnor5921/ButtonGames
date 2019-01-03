@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,7 +13,9 @@ import java.util.concurrent.TimeUnit;
 
 public class GameCode extends Application
 {
-    static List<String> order = new ArrayList<String>();
+    private static List<Button> order = new ArrayList<Button>();
+    private static boolean showingOrder = false;
+    private static long timeStep;
 
     @Override
     public void start(Stage primaryStage)
@@ -21,35 +25,32 @@ public class GameCode extends Application
 
     public static void createOrder()
     {
-        for(int i = 0; i < Main.level; i++)
-        {
-            order.add(pickRandomColor());
-        }
-        for(int i = 0; i < order.size(); i++)
-        {
-            System.out.println(order.get(i));
-        }
+        showingOrder = true;
+        Button btn;
+        btn = pickRandomColor();
+        order.add(btn);
+        timer(btn);
         Main.level++;
     }
 
-    public static String pickRandomColor()
+    public static Button pickRandomColor()
     {
         int num = (int)(Math.random()*4);
         if(num == 0)
         {
-            return "green";
+            return Main.green;
         }
         else if(num == 1)
         {
-            return "blue";
+            return Main.blue;
         }
         else if(num == 2)
         {
-            return "red";
+            return Main.red;
         }
         else
         {
-            return "yellow";
+            return Main.yellow;
         }
     }
 
@@ -63,6 +64,32 @@ public class GameCode extends Application
         {
             System.out.println("False");
         }
+    }
+
+    public static void timer(Button btn)
+    {
+        timeStep = System.nanoTime() + 1000000000L;
+        new AnimationTimer()
+        {
+            public void handle(long now)
+            {
+                if(now > timeStep)
+                {
+                    timeStep = now + 1000000000L;
+                    showingOrder = !showingOrder;
+                }
+                if(showingOrder)
+                {
+                    Main.green.setStyle("-fx-background-color: lightgreen;");
+                }
+                else
+                    {
+                        Main.green.setStyle("-fx-background-color: green;");
+                        this.stop();
+                    }
+
+            }
+        }.start();
     }
 
     public static void main(String[] args)

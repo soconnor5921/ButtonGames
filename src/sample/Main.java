@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Main extends Application
@@ -15,6 +16,9 @@ public class Main extends Application
 
     public static int level = 1;
     public static Button green = new Button();
+    public static Button blue = new Button();
+    public static Button red = new Button();
+    public static Button yellow = new Button();
 
 
    @Override
@@ -24,7 +28,7 @@ public class Main extends Application
         primaryStage.setTitle("Simon Says");
 
         //Button green = new Button();
-        green.setStyle("-fx-background-color: green; ");
+        green.setStyle("-fx-background-color: green;");
         green.setMinSize(50,50);
         green.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -33,24 +37,22 @@ public class Main extends Application
             }
         });
 
-        Button blue = new Button();
-        blue.setStyle("-fx-background-color: blue; ");
+        //Button blue = new Button();
+        blue.setStyle("-fx-background-color: blue;");
         blue.setMinSize(50,50);
 
-        Button red = new Button();
-        red.setStyle("-fx-background-color: red; ");
+        //Button red = new Button();
+        red.setStyle("-fx-background-color: red;");
         red.setMinSize(50,50);
 
-        Button yellow = new Button();
-        yellow.setStyle("-fx-background-color: yellow; ");
+        //Button yellow = new Button();
+        yellow.setStyle("-fx-background-color: yellow;");
         yellow.setMinSize(50,50);
 
         Button start = new Button("Start Game");
         start.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                GameCode.createOrder();
-            }
+            public void handle(ActionEvent event) {GameCode.createOrder();}
         });
 
         HBox hbox1 = new HBox(green, blue, red, yellow, start);
